@@ -9,40 +9,59 @@
         font-family:Verdana, Geneva, sans-serif;
         margin:1px;
         padding:1px;
-        background:#f5f5f5;
+        background: url('background.jpeg') no-repeat center center fixed;
+        background-size: cover;
         color:#333;
+        min-height:100vh;
         display:flex;
         flex-direction:column;
       }
       header{
-        background:#322;
-        color:#f265f3;
+        background:#bdd7ed;
+        color:white;
         text-align:center;
         padding:10px;
       }
       nav{
-        background:#222;
+        background:#0d0557;
         padding:10px;
         text-align:center;
         display:block;
       }
       nav a{
-        color:white;
+        color:#f1faee;
         margin:0 15px;
         text-decoration:none;
         font-weight:bold;
         display:inline-block;
       }
       nav a:hover{
-        text-decortion:underline;
+        text-decoration: underline;
       }
-      section{
-        padding:40px;
-        text-align:center;
+      .hero {
+         padding: 100px 20px;
+         text-align: center;
+         color: white; 
+          background: rgba(0,0,0,0.4); 
+          border-radius: 10px;
+          margin: 40px;
       }
+
+      .hero h1 {
+          font-size: 3em;
+          color: #00bfff; 
+          text-shadow: 0 0 10px #00bfff, 0 0 20px #0099cc; 
+      }
+
+      .hero p {
+        font-size: 1.2em;
+         margin-top: 10px;
+         text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+     }
+
       footer{
-        background :#f42655;
-        color:white;
+        background :#457b9d;
+        color:#f1faee;
         text-align:right;
         padding:10px;
         margin-top:auto;
@@ -60,7 +79,12 @@
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="register.html">Register</a>
-     <a href="location.html"></a>
+    <a href="location.html">location</a>
   </nav>
+  <div class="hero">
+    <h1>Welcome to the Tech Quiz Competition</h1>
+    <p>Join us for an exciting quiz challenge on all things tech!</p>
+  </div>
   <footer><p>&copy; 2025 MyEvent | Designed by Priyanka</p></footer>
 </body>
+</html>
