@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tech Quiz Competition</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  .hero {
+         padding: 100px 20px;
+         text-align: center;
+         color: white; 
+          background: rgba(0,0,0,0.4); 
+          border-radius: 10px;
+          margin: 40px;
+      }
+
+      .hero h1 {
+          font-size: 3em;
+          color: #00bfff; 
+          text-shadow: 0 0 10px #00bfff, 0 0 20px #0099cc; 
+      }
+
+      .hero p {
+        font-size: 1.2em;
+         margin-top: 10px;
+         text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+     }
+ </style>
+
+</head>
+<body>
+  <div id="header"></div>
+  <div class="hero">
+    <h1>Welcome to the Tech Quiz Competition</h1>
+    <p>Join us for an exciting quiz challenge on all things tech!</p>
+  </div>
+  
+
+  <section>
+    <h2 style="color:white">🚀 Get Ready for the Ultimate Tech Quiz!</h2>
+    <p style="color:white">Test your knowledge in programming, tech trends, and problem solving.</p>
+
+    <!-- Slideshow -->
+    <div class="slideshow">
+      <img src="images/stage.jpeg" class="active" alt="Stage">
+      <img src="images/teams.jpeg" alt="Teams">
+      <img src="images/trophy.jpeg" alt="Trophy">
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script>
+    // load header and footer
+    async function loadPart(id, file) {
+      let resp = await fetch(file);
+      document.getElementById(id).innerHTML = await resp.text();
+    }
+    loadPart("header", "header.html");
+    loadPart("footer", "footer.html");
+
+    // slideshow
+    let slides, index = 0;
+    function showSlides() {
+      slides = document.querySelectorAll(".slideshow img");
+      slides.forEach((img, i) => img.classList.toggle("active", i === index));
+      index = (index + 1) % slides.length;
+    }
+    setInterval(showSlides, 3000);
+  </script>
+</body>
+</html>
