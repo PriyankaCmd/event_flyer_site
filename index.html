@@ -56,8 +56,8 @@
       let resp = await fetch(file);
       document.getElementById(id).innerHTML = await resp.text();
     }
-    loadPart("header", "header.html");
-    loadPart("footer", "footer.html");
+    loadPart("header", "./header.html");
+    loadPart("footer", "./footer.html");
 
     // slideshow
     let slides, index = 0;
@@ -70,3 +70,4 @@
   </script>
 </body>
 </html>
+
