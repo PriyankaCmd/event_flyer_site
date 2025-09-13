@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About - Tech Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <section>
+    <h2>About the Competition</h2>
+    <p>This is a national-level tech quiz where students compete in coding, AI, and general IT knowledge.</p>
+  </section>
+
+  <div id="footer"></div>
+
+  <script>
+    async function loadPart(id, file) {
+      let resp = await fetch(file);
+      document.getElementById(id).innerHTML = await resp.text();
+    }
+    loadPart("header", "header.html");
+    loadPart("footer", "footer.html");
+  </script>
+</body>
+</html>
