@@ -4,14 +4,32 @@
   <meta charset="UTF-8">
   <title>About - Tech Quiz</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+h2{
+color:white;
+}
+p{
+color:white;
+}
+</style>
+
 </head>
 <body>
   <div id="header"></div>
-
+<main>
   <section>
-    <h2>About the Competition</h2>
-    <p>This is a national-level tech quiz where students compete in coding, AI, and general IT knowledge.</p>
+    <h2 style="color:white">Event Details</h2>
+  <p>
+    Join us for an exciting **Tech Quiz Competition**!  </p>
+   <p> 🔹 Date: 25th September 2026 </p>
+    <p>🔹 Time: 10 AM onwards  </p>
+   <p> 🔹 Venue: KU,warangal(Auditorium)</p>  
+   <p> 🔹 Open to all students passionate about technology.</p>  
+ 
   </section>
+</main>
+
+
 
   <div id="footer"></div>
 
@@ -20,8 +38,9 @@
       let resp = await fetch(file);
       document.getElementById(id).innerHTML = await resp.text();
     }
-    loadPart("header", "header.html");
-    loadPart("footer", "footer.html");
+    loadPart("header", "./header.html");
+    loadPart("footer", "./footer.html");
   </script>
 </body>
 </html>
+
