@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Flyer - Registration</title>
+  <link rel="stylesheet" href="style.css">
+<style>
+h2{
+color:white;
+}
+p{
+color:white;
+}
+
+ section {
+      padding: 40px;
+      text-align: center;
+    }
+    .map {
+      width: 100%;
+      height: 300px;
+      border: 0;
+      margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div id="header"></div>
+<main>
+<section id="location">
+    <h2>Event Location</h2>
+    <p>Here’s how you can find us:</p>
+    <!-- Replace the src link with your event’s Google Maps location -->
+   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3793.8023188439656!2d79.5619291!3d18.034375499999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3345f635da0d9b%3A0x7ffca009fb4a5625!2sKUCET!5e0!3m2!1sen!2sin!4v1757778476744!5m2!1sen!2sin"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  </section>
+
+</main>
+<div id="footer"></div>
+<script>
+    async function loadPart(id, file) {
+      let resp = await fetch(file);
+      document.getElementById(id).innerHTML = await resp.text();
+    }
+    loadPart("header", "header.html");
+    loadPart("footer", "footer.html");
+  </script>
+</body>
+</html>
+<!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3793.8023188439656!2d79.5619291!3d18.034375499999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3345f635da0d9b%3A0x7ffca009fb4a5625!2sKUCET!5e0!3m2!1sen!2sin!4v1757778476744!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
