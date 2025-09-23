@@ -74,80 +74,87 @@
   <div id="footer"></div>
 
   <script>
-      <!--  // load header and footer
-    async function loadPart(id, file) {
-      let resp = await fetch(file);
-      document.getElementById(id).innerHTML = await resp.text();
-    }
-    loadPart("header", "header.html");
-    loadPart("footer", "footer.html");
-
-    // slideshow
-    let slides, index = 0;
-    function showSlides() {
-      slides = document.querySelectorAll(".slideshow img");
-      slides.forEach((img, i) => img.classList.toggle("active", i === index));
-      index = (index + 1) % slides.length;
-    }
-    setInterval(showSlides, 3000);
-//fyer data 
-const flyerData={
-	 date: "March 15, 2025",
-	time:"10:00 AM-4:00 PM",
-	venue: "Main Auditorium, ABC Institute",
-	organizer: "TechClub"
-};-->
 async function loadFlyer() {
-  const response = await fetch('flyer.json');
-  const flyerData = await response.json();
+  try {
+    // Fetch flyer.json relative to the HTML page
+    const response = await fetch('./flyer.json'); 
+    if (!response.ok) throw new Error('flyer.json not found');
 
-  // Hero
-  document.querySelector(".hero h1").textContent = flyerData.title;
-  document.querySelector(".hero p").textContent = flyerData.subtitle;
+    const flyerData = await response.json();
 
-  // Slideshow
-  const slideshow = document.querySelector(".slideshow");
-  slideshow.innerHTML = "";
-  flyerData.images.forEach((src, i) => {
-    const img = document.createElement("img");
-    img.src = src;
-    if(i === 0) img.classList.add("active");
-    slideshow.appendChild(img);
-  });
-//flyer details
-const detailsDiv=document.getElementById("flyer-details");
-detailsDiv.innerHTML=`<p><strong>Date:</strong>${flyerData.date}</p>
-<p><strong>Time:</strong>${flyerData.time}</p>
-<p><strong>Venue:</strong>${flyerData.venue}</p>
-<p><strong>Organized by:</strong>${flyerData.organizer}</p> 
-<div>
-      <iframe src="${flyerData.mapEmbed}" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-`;
- // Registration button
-  document.querySelector(".btn").href = flyerData.registrationLink;
+    // Hero section
+    const heroH1 = document.querySelector(".hero h1");
+    const heroP = document.querySelector(".hero p");
+    if(heroH1) heroH1.textContent = flyerData.title || "Event Title";
+    if(heroP) heroP.textContent = flyerData.subtitle || "";
 
-  // Start slideshow
-  let index = 0;
-  function showSlides() {
-    const slides = document.querySelectorAll(".slideshow img");
-    slides.forEach((img, i) => img.classList.toggle("active", i === index));
-    index = (index + 1) % slides.length;
+    // Slideshow
+    const slideshow = document.querySelector(".slideshow");
+    if(slideshow) {
+      slideshow.innerHTML = "";
+      flyerData.images.forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        if(i === 0) img.classList.add("active");
+        slideshow.appendChild(img);
+      });
+
+      // Slideshow rotation
+      let index = 0;
+      setInterval(() => {
+        const slides = document.querySelectorAll(".slideshow img");
+        slides.forEach((img, i) => img.classList.toggle("active", i === index));
+        index = (index + 1) % slides.length;
+      }, 3000);
+    }
+
+    // Flyer details
+    const detailsDiv = document.getElementById("flyer-details");
+    if(detailsDiv) {
+      detailsDiv.innerHTML = `
+        <p><strong>Date:</strong> ${flyerData.date}</p>
+        <p><strong>Time:</strong> ${flyerData.time}</p>
+        <p><strong>Venue:</strong> ${flyerData.venue}</p>
+        <p><strong>Organized by:</strong> ${flyerData.organizer}</p>
+        <div>
+          <iframe src="${flyerData.mapEmbed}" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      `;
+    }
+
+    // Register button
+    const btn = document.querySelector(".btn");
+    if(btn) btn.href = flyerData.registrationLink || "#";
+
+  } catch (error) {
+    console.error("Error loading flyer:", error);
+    const detailsDiv = document.getElementById("flyer-details");
+    if(detailsDiv) detailsDiv.innerHTML = "<p>Unable to load event details.</p>";
   }
-  setInterval(showSlides, 3000);
 }
+
 // Load header/footer first, then flyer
 async function loadPage() {
-  await fetch('header.html').then(r => r.text()).then(html => document.getElementById("header").innerHTML = html);
-  await fetch('footer.html').then(r => r.text()).then(html => document.getElementById("footer").innerHTML = html);
-  loadFlyer();
+  try {
+    const headerHtml = await fetch('./header.html').then(r=>r.text());
+    document.getElementById("header").innerHTML = headerHtml;
+  } catch { console.warn("Header not found"); }
+
+  try {
+    const footerHtml = await fetch('./footer.html').then(r=>r.text());
+    document.getElementById("footer").innerHTML = footerHtml;
+  } catch { console.warn("Footer not found"); }
+
+  await loadFlyer();
 }
 
-loadPage();
-  </script>
+document.addEventListener("DOMContentLoaded", loadPage);
+</script>
+
 
 </body>
 </html>
+
 
 
 
