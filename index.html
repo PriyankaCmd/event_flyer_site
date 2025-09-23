@@ -25,6 +25,26 @@
          margin-top: 10px;
          text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
      }
+     section {
+  padding: 30px;
+}
+
+/* Slideshow */
+.slideshow {
+  position: relative;
+  max-width: 600px;
+  margin: 20px auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.slideshow img {
+  width: 100%;
+  display: none;
+}
+.slideshow img.active {
+  display: block;
+}
+
  </style>
 
 </head>
@@ -36,17 +56,21 @@
   </div>
   
 
-  <section>
-    <h2 style="color:white">🚀 Get Ready for the Ultimate Tech Quiz!</h2>
-    <p style="color:white">Test your knowledge in programming, tech trends, and problem solving.</p>
+  <section class="flyer">
+  <h2>📢 Event Flyer</h2>
+  
+  <div class="slideshow">
+    <img src="images/flyer-placeholder.png" alt="Event Flyer" class="active">
+    <img src="images/flyer2.png" alt="Event Flyer 2">
+  </div>
 
-    <!-- Slideshow -->
-    <div class="slideshow">
-      <img src="images/stage.jpeg" class="active" alt="Stage">
-      <img src="images/teams.jpeg" alt="Teams">
-      <img src="images/trophy.jpeg" alt="Trophy">
-    </div>
-  </section>
+  <p><strong>Date:</strong> March 15, 2025</p>
+  <p><strong>Time:</strong> 10:00 AM - 4:00 PM</p>
+  <p><strong>Venue:</strong> Main Auditorium, ABC Institute</p>  
+  <p><strong>Organized by:</strong> TechClub</p>
+  <a href="register.html" class="btn">Register Now</a>
+</section>
+
 
   <div id="footer"></div>
 
@@ -70,4 +94,5 @@
   </script>
 </body>
 </html>
+
 
