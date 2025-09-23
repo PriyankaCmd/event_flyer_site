@@ -55,7 +55,6 @@
     <p>Join us for an exciting quiz challenge on all things tech!</p>
   </div>
   
-
   <section class="flyer">
   <h2>📢 Event Flyer</h2>
   
@@ -63,25 +62,25 @@
     <img src="images/flyer-placeholder.png" alt="Event Flyer" class="active">
     <img src="images/flyer2.png" alt="Event Flyer 2">
   </div>
-
-  <p><strong>Date:</strong> March 15, 2025</p>
-  <p><strong>Time:</strong> 10:00 AM - 4:00 PM</p>
-  <p><strong>Venue:</strong> Main Auditorium, ABC Institute</p>  
-  <p><strong>Organized by:</strong> TechClub</p>
+<div id="flyer-details"></div>
+ <div style="margin: 20px 0;">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3793.8023188439656!2d79.5619291!3d18.034375499999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3345f635da0d9b%3A0x7ffca009fb4a5625!2sKUCET!5e0!3m2!1sen!2sin!4v1757778476744!5m2!1sen!2sin"
+     style="border:0;" allowfullscreen="" loading="lazy">  </iframe>
+</div>
   <a href="register.html" class="btn">Register Now</a>
 </section>
-
 
   <div id="footer"></div>
 
   <script>
-    // load header and footer
+      <!--  // load header and footer
     async function loadPart(id, file) {
       let resp = await fetch(file);
       document.getElementById(id).innerHTML = await resp.text();
     }
-    loadPart("header", "./header.html");
-    loadPart("footer", "./footer.html");
+    loadPart("header", "header.html");
+    loadPart("footer", "footer.html");
 
     // slideshow
     let slides, index = 0;
@@ -91,8 +90,64 @@
       index = (index + 1) % slides.length;
     }
     setInterval(showSlides, 3000);
+//fyer data 
+const flyerData={
+	 date: "March 15, 2025",
+	time:"10:00 AM-4:00 PM",
+	venue: "Main Auditorium, ABC Institute",
+	organizer: "TechClub"
+};-->
+async function loadFlyer() {
+  const response = await fetch('flyer.json');
+  const flyerData = await response.json();
+
+  // Hero
+  document.querySelector(".hero h1").textContent = flyerData.title;
+  document.querySelector(".hero p").textContent = flyerData.subtitle;
+
+  // Slideshow
+  const slideshow = document.querySelector(".slideshow");
+  slideshow.innerHTML = "";
+  flyerData.images.forEach((src, i) => {
+    const img = document.createElement("img");
+    img.src = src;
+    if(i === 0) img.classList.add("active");
+    slideshow.appendChild(img);
+  });
+//flyer details
+const detailsDiv=document.getElementById("flyer-details");
+detailsDiv.innerHTML=`<p><strong>Date:</strong>${flyerData.date}</p>
+<p><strong>Time:</strong>${flyerData.time}</p>
+<p><strong>Venue:</strong>${flyerData.venue}</p>
+<p><strong>Organized by:</strong>${flyerData.organizer}</p> 
+<div>
+      <iframe src="${flyerData.mapEmbed}" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+`;
+ // Registration button
+  document.querySelector(".btn").href = flyerData.registrationLink;
+
+  // Start slideshow
+  let index = 0;
+  function showSlides() {
+    const slides = document.querySelectorAll(".slideshow img");
+    slides.forEach((img, i) => img.classList.toggle("active", i === index));
+    index = (index + 1) % slides.length;
+  }
+  setInterval(showSlides, 3000);
+}
+// Load header/footer first, then flyer
+async function loadPage() {
+  await fetch('header.html').then(r => r.text()).then(html => document.getElementById("header").innerHTML = html);
+  await fetch('footer.html').then(r => r.text()).then(html => document.getElementById("footer").innerHTML = html);
+  loadFlyer();
+}
+
+loadPage();
   </script>
+
 </body>
 </html>
+
 
 
